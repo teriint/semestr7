@@ -1,0 +1,20 @@
+#include <QtGui/QGuiApplication>
+#include <QQmlContext>
+#include <QQmlEngine>
+#include <QQuickView>
+#include <QtQuick/qquickitem.h>
+#include <QtQuick/qquickview.h>
+#include <QObject>
+#include <QQuickItem>
+#include "mainwindow.h"
+
+int main(int argc, char *argv[])
+{
+    QGuiApplication app(argc, argv);
+    QQuickView view;
+    QQmlContext *ctxt = view.rootContext();
+    ctxt->setContextProperty("mainwindow", 0);
+    view.setSource(QUrl ("qrc:/main.qml"));
+    return app.exec();
+    }
+
