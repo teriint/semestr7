@@ -1,0 +1,108 @@
+ fs = 5e3;
+ t = 0:1/fs:5;
+ t = t';
+ A = 2.5;
+ phi = pi/3;
+ f = 5;
+
+ s1 = A*sin(2*pi*f*t + phi);
+ plot(t,s1);
+
+ figure(2);
+ F = (0:length(s1)-1)/(length(s1)/(fs));
+ plot(F, abs(fft(s1)));
+ 
+ alpha = 4;
+ s2 = exp(-alpha*t).*s1;
+ figure(3);
+ plot(t,s2);
+
+ figure(4);
+ F = (0:length(s2)-1)/(length(s2)/(fs));
+ plot(F, abs(fft(s2)));
+
+ s3 = rectpuls(t);
+ figure(5);
+ plot(t,s3);
+
+ figure(6);
+ F = (0:length(s3)-1)/(length(s3)/(fs));
+ plot(F, abs(fft(s3)));
+
+ s4 = tripuls(t);
+ figure(7);
+ plot(t,s4);
+
+ figure(8);
+ F = (0:length(s4)-1)/(length(s4)/(fs));
+ plot(F, abs(fft(s4)));
+
+ s5 = sinc(t);
+ figure(9);
+ plot(t,s5);
+
+ figure(10);
+ F = (0:length(s5)-1)/(length(s5)/(fs));
+ plot(F, abs(fft(s5)));
+
+ s6 = gauspuls (t, fs, 0.0001);
+ figure(11);
+ plot(t,s6);
+
+ figure(12);
+ F = (0:length(s6)-1)/(length(s6)/(fs));
+ plot(F, abs(fft(s6)));
+
+ s7 = pulstran (t, 0: 1/3: 1, 'tripuls');
+ figure(13);
+ plot(t,s7);
+
+ figure(14);
+ F = (0:length(s7)-1)/(length(s7)/(fs));
+ plot(F, abs(fft(s7)));
+
+ T = 10*(1/50);
+ Fs = 5000;
+ dt = 1/Fs;
+ t = 0:dt:T-dt;
+ s8 = sawtooth(2*pi*50*t);
+ figure(15);
+ plot(t, s8);
+
+ figure(16);
+ F = (0:length(s8)-1)/(length(s8)/(fs));
+ plot(F, abs(fft(s8)));
+
+ s9 = square(t);
+ figure(17);
+ plot(t/pi, s9, '.-', t/pi, sin(t));
+
+ figure(18);
+ F = (0:length(s9)-1)/(length(s9)/(fs));
+ plot(F, abs(fft(s9)));
+ 
+ s10 = diric(t, 3);
+ figure(19);
+ plot(t,s10);
+
+ figure(20);
+ F = (0:length(s10)-1)/(length(s10)/(fs));
+ plot(F, abs(fft(s10)));
+ 
+ s11 = chirp(t, 4000, 200, 5000);
+ figure(21);
+ plot(t,s11);
+
+ figure(22);
+ F = (0:length(s11)-1)/(length(s11)/(fs));
+ plot(F, abs(fft(s11)));
+
+ [y, Fs] = audioread('E:/11.wav');
+ sound(y, Fs);
+ figure(23);
+ plot(y);
+ 
+ figure(24);
+ Fs
+ F = (0:length(y)-1)/(length(y)/96000);
+ plot(F, abs(fft(y)));
